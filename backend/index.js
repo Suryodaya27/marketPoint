@@ -26,7 +26,8 @@ const signin = require('./routes/signin');
 const addproducts = require('./routes/addproducts');
 const getproducts = require('./routes/getProducts');
 const addToCart = require('./routes/addTocart');
-const getPrice = require('./routes/getPrice')
+const getPrice = require('./routes/getPrice');
+const getCart = require('./routes/getCart');
 
 app.use('/api/signup' , signup);
 app.use('/api/signin', signin);
@@ -34,6 +35,7 @@ app.use('/api/add-products', addproducts);
 app.use('/api/get-products', getproducts);
 app.use('/api/add-to-cart',addToCart);
 app.use('/api/get-price', getPrice);
+app.use('/api/get-cart',getCart);
 
 const port = 8080;
 
