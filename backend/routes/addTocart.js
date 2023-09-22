@@ -9,7 +9,7 @@ app.use(express.json());
 const verifyToken = require("../middlewear/auth");
 
 router.post("/", verifyToken, async (req, res) => {
-  const  userId  = req.userId;
+  const userId = req.userId;
   console.log(userId);
   const { productId, productCount } = req.body;
 
@@ -44,6 +44,14 @@ router.post("/", verifyToken, async (req, res) => {
         },
       });
 
+      // Decrease productCount from productQuantity
+      await prisma.product.update({
+        where: { productId },
+        data: {
+          productQuantity: product.productQuantity - productCount,
+        },
+      });
+
       res.json(updatedCartItem);
     } else {
       // If the product is not in the cart, create a new cart item
@@ -52,6 +60,14 @@ router.post("/", verifyToken, async (req, res) => {
           productId,
           userId,
           productCount,
+        },
+      });
+
+      // Decrease productCount from productQuantity
+      await prisma.product.update({
+        where: { productId },
+        data: {
+          productQuantity: product.productQuantity - productCount,
         },
       });
 
