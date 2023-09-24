@@ -5,15 +5,15 @@ import { Menu, X } from 'lucide-react'
 
 const menuItems = [
   {
-    name: 'Home',
+    name: 'Products',
     href: '#',
   },
   {
-    name: 'About',
+    name: 'Cart',
     href: '#',
   },
   {
-    name: 'Contact',
+    name: 'Wishlist',
     href: '#',
   },
 ]
@@ -26,7 +26,7 @@ export function Navbar() {
   }
 
   return (
-    <div className="relative w-full bg-white">
+    <div className=" py-2 relative w-full bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
           <span>
@@ -43,7 +43,7 @@ export function Navbar() {
               />
             </svg>
           </span>
-          <span className="font-bold">DevUI</span>
+          <span className="font-bold">Apna Mart</span>
         </div>
         <div className="hidden grow items-start lg:flex">
           <ul className="ml-12 inline-flex space-x-8">
@@ -64,7 +64,7 @@ export function Navbar() {
             type="button"
             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
-            Button text
+            Login
           </button>
         </div>
         <div className="lg:hidden">
@@ -90,7 +90,7 @@ export function Navbar() {
                         />
                       </svg>
                     </span>
-                    <span className="font-bold">DevUI</span>
+                    <span className="font-bold">Apna Mart</span>
                   </div>
                   <div className="-mr-2">
                     <button
@@ -122,7 +122,7 @@ export function Navbar() {
                   type="button"
                   className="mt-4 w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
-                  Button text
+                  Login
                 </button>
               </div>
             </div>

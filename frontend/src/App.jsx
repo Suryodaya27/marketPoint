@@ -1,12 +1,39 @@
-import { Navbar } from "./components/Navbar"
+import React, { useState } from 'react';
+import { Navbar } from "./components/Navbar";
+import ProductList from "./pages/Products";
+import Cart from "./pages/Cart";
+import {Signin} from "./components/Signin";
+import {Signup} from "./components/Signup";
 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  const handleLogin = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem('token', newToken);
+  };
+
+  const handleLogout = () => {
+    setToken(null);
+    localStorage.removeItem('token');
+  };
 
   return (
     <>
-      <Navbar/>
+      <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={<ProductList  />}
+        />
+        <Route path="/cart" element={token ? <Cart /> : <Signin onLogin={handleLogin} />} />
+        <Route path="/signin" element={<Signin/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+      </Routes>
+    </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
