@@ -1,13 +1,52 @@
-import React from 'react'
-import { ArrowRight } from 'lucide-react'
+import React from "react";
+import { ArrowRight } from "lucide-react";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+async function signupUser({ email, password }) {
+  try {
+    const response = await axios.post("http://localhost:8080/api/signup", {
+      email,
+      password,
+    });
+
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error("Signup failed");
+    }
+  } catch (error) {
+    throw new Error("Signup failed: " + error.message);
+  }
+}
 
 export function Signup() {
+  const navigate = useNavigate();
+
+  const signupMutation = useMutation(signupUser);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      await signupMutation.mutateAsync({ email, password });
+
+      // Redirect to the login page upon successful signup
+      navigate("/login");
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
+  };
+
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
           <div className="mb-2 flex justify-center">
-            <svg
+          <svg
               width="50"
               height="56"
               viewBox="0 0 50 56"
@@ -21,7 +60,7 @@ export function Signup() {
             </svg>
           </div>
           <h2 className="text-center text-2xl font-bold leading-tight text-black">
-            Sign up to create account
+            Sign up to create an account
           </h2>
           <p className="mt-2 text-center text-base text-gray-600">
             Already have an account?{' '}
@@ -33,22 +72,8 @@ export function Signup() {
               Sign In
             </a>
           </p>
-          <form action="#" method="POST" className="mt-8">
+          <form action="#" method="POST" className="mt-8" onSubmit={handleSubmit}>
             <div className="space-y-5">
-              <div>
-                <label htmlFor="name" className="text-base font-medium text-gray-900">
-                  {' '}
-                  Full Name{' '}
-                </label>
-                <div className="mt-2">
-                  <input
-                    className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                    type="text"
-                    placeholder="Full Name"
-                    id="name"
-                  ></input>
-                </div>
-              </div>
               <div>
                 <label htmlFor="email" className="text-base font-medium text-gray-900">
                   {' '}
@@ -60,7 +85,9 @@ export function Signup() {
                     type="email"
                     placeholder="Email"
                     id="email"
-                  ></input>
+                    name="email"
+                    required
+                  />
                 </div>
               </div>
               <div>
@@ -76,12 +103,14 @@ export function Signup() {
                     type="password"
                     placeholder="Password"
                     id="password"
-                  ></input>
+                    name="password"
+                    required
+                  />
                 </div>
               </div>
               <div>
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
                   Create Account <ArrowRight className="ml-2" size={16} />
@@ -92,5 +121,5 @@ export function Signup() {
         </div>
       </div>
     </section>
-  )
+  );
 }
