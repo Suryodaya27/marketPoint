@@ -7,17 +7,8 @@ import {Signup} from "./components/Signup";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
-  const [token, setToken] = useState(localStorage.getItem('token'));
-
-  const handleLogin = (newToken) => {
-    setToken(newToken);
-    localStorage.setItem('token', newToken);
-  };
-
-  const handleLogout = () => {
-    setToken(null);
-    localStorage.removeItem('token');
-  };
+  const token = useState(localStorage.getItem('authToken'));
+  console.log(token)
 
   return (
     <>
@@ -27,7 +18,7 @@ function App() {
           path="/"
           element={<ProductList  />}
         />
-        <Route path="/cart" element={token ? <Cart /> : <Signin onLogin={handleLogin} />} />
+        <Route path="/cart" element={token ? <Cart /> : <Signin/>} />
         <Route path="/signin" element={<Signin/>}/>
         <Route path="/signup" element={<Signup/>}/>
       </Routes>
