@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Function to sign in user and store token with expiration time
 async function signinUser({ email, password }) {
   try {
     const response = await axios.post("http://localhost:8080/api/signin", {
@@ -14,14 +14,7 @@ async function signinUser({ email, password }) {
     });
 
     if (response.status === 200) {
-      // Assuming the token is returned as response.data.token
       const token = response.data.token;
-
-      // Store the token in localStorage along with expiration time
-      const expirationTime = new Date().getTime() + 3600 * 1000; // 1 hour
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("authTokenExpiration", expirationTime);
-
       return token;
     } else {
       throw new Error("Signin failed");
@@ -36,9 +29,13 @@ export function Signin() {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const queryClient = useQueryClient();
+  const { login } = useAuth(); // Use the login function from your AuthContext
 
   const signinMutation = useMutation(signinUser, {
     onSuccess: (token) => {
+      // Use the login function to set the user token and expiration time
+      login(token);
+
       // Invalidate and refetch user-related queries upon successful signin
       queryClient.invalidateQueries("user");
       // Redirect to the dashboard or any other authenticated route
@@ -64,31 +61,9 @@ export function Signin() {
     }
   };
 
-  // Function to check and remove expired token
-  const checkTokenExpiration = () => {
-    const expirationTime = localStorage.getItem("authTokenExpiration");
-    if (expirationTime) {
-      const currentTime = new Date().getTime();
-      if (currentTime > expirationTime) {
-        // Token has expired, delete it from localStorage
-        localStorage.removeItem("authToken");
-        localStorage.removeItem("authTokenExpiration");
-      }
-    }
-  };
 
-  // Run the checkTokenExpiration function every minute
-  useEffect(() => {
-    const tokenExpirationCheckInterval = setInterval(
-      checkTokenExpiration,
-      60000 // 1 minute
-    );
 
-    return () => {
-      // Clear the interval when the component unmounts
-      clearInterval(tokenExpirationCheckInterval);
-    };
-  }, []);
+
   return (
     <AnimatePresence mode="wait">
       <motion.section

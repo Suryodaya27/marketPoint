@@ -60,7 +60,7 @@ function ProductList() {
   );
 
   // Calculate total number of pages based on the filtered data and page size
-  const pageSize = 10; // Number of products per page
+  const pageSize = 12; // Number of products per page
   const totalPages = Math.ceil(searchedData.length / pageSize);
 
   // Calculate the starting index for the current page
@@ -115,7 +115,7 @@ function ProductList() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-start gap-4">
+          <div className="py-4 flex flex-wrap justify-start gap-4">
             {productsForPage.map((product) => (
               <ProductCard key={product.productId} product={product} />
             ))}

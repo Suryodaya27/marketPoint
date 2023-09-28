@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 const menuItems = [
   {
@@ -20,12 +21,11 @@ const menuItems = [
 export function Navbar() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const token = localStorage.getItem("authToken");
+  const { user, logout } = useAuth(); // Use the useAuth hook to access user and logout function
 
   const handleLogout = () => {
-    // Remove the token from localStorage
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("authTokenExpiration");
+    // Call the logout function from the context
+    logout();
     // Navigate to the home page or any other route
     navigate("/");
   };
@@ -71,7 +71,7 @@ export function Navbar() {
           </ul>
         </div>
         <div className="lg:block">
-          {token ? (
+          {user ? (
             <button
               type="button"
               onClick={handleLogout}
