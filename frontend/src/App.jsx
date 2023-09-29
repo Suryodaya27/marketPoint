@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from './AuthContext'; // Import the useAuth hook
-import { Navbar } from './components/Navbar';
 import ProductList from './pages/Products';
+import { Product } from './components/Product';
 import Cart from './pages/Cart';
 import { Signin } from './components/Signin';
 import { Signup } from './components/Signup';
@@ -17,10 +17,10 @@ function App() {
           <Route path="/" element={<ProductList />} />
           <Route
             path="/cart"
-            element={user ? <Cart /> : <Signin />} // Render Cart if the user is authenticated
-          />
+            element={user ? <Cart /> : <Signin />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/product/:productId" element={<Product/>} />
         </Routes>
       </Router>
     </>
