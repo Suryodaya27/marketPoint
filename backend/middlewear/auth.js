@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   // Retrieve the token from the request headers
   const authorizationHeader = req.headers.authorization;
   const token = authorizationHeader.replace("Bearer ", "");
-  // console.log(token);
+  console.log(token);
   if (!token) {
     res.status(401).send("Access denied. Token missing.");
     return;
