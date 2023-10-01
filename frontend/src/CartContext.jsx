@@ -6,12 +6,11 @@ export const useCart = () => useContext(CartContext);
 import axios from "axios";
 export const CartProvider = ({ children }) => {
   const addToCart = async (productId, productCount, authToken) => {
-    console.log(authToken);
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${authToken.token}`,
     };
-    console.log(headers);
+    // console.log(headers);
     const data = {
       productId,
       productCount,
@@ -36,8 +35,37 @@ export const CartProvider = ({ children }) => {
       throw error;
     }
   };
+
+  const removeFromCart = async (cartItemId, authToken) => {
+    console.log(authToken);
+    console.log(cartItemId);
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken.token}`,
+    };
+    const data = {
+      cartItemId,
+    };
+    try {
+      const response = await axios.delete(
+        'http://localhost:8080/api/remove-from-cart',
+        { data, headers } // Pass data as the second argument
+      );
+  
+      if (response.status === 200) {
+        // Successfully deleted from cart
+        // Optionally, you can update the cartData state here
+        console.log(response);
+      } else {
+        throw new Error('Failed to delete from cart');
+      }
+    } catch (error) {
+      console.error('Error deleting from cart:', error);
+      throw error;
+    }
+  };
   return (
-    <CartContext.Provider value={{ addToCart }}>
+    <CartContext.Provider value={{ addToCart ,removeFromCart}}>
       {children}
     </CartContext.Provider>
   );
