@@ -13,8 +13,8 @@ const menuItems = [
     to: "/cart", // Replace with your actual route
   },
   {
-    name: "Wishlist",
-    to: "/wishlist", // Replace with your actual route
+    name: "Order",
+    to: "/order", // Replace with your actual route
   },
 ];
 
