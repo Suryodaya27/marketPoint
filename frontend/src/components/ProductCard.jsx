@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 function ProductCard({ product }) {
   return (
-    <div className="w-[300px] rounded-md border">
+    <div className="w-[300px] rounded-md border bg-white">
       {/* <img src={product.imageURL} alt={product.productName} className="h-[200px] w-full rounded-md object-cover" /> */}
       <div className="p-4">
         <h1 className="text-lg font-semibold">{product.productName}</h1>

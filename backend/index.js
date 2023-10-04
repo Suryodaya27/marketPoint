@@ -2,8 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const helmet = require("helmet");
-
+const ngrok = require('ngrok');
 const app = express();
 
 
@@ -28,6 +27,7 @@ const getCart = require("./routes/getCart");
 const removeFromCart = require("./routes/removeFromCart");
 const increaseCartItem = require("./routes/increaseCartItem");
 const decreaseCartItem = require("./routes/decreaseCartItem");
+const order = require("./routes/order");
 
 app.use("/api/signup", signup);
 app.use("/api/signin", signin);
@@ -39,9 +39,12 @@ app.use("/api/get-cart", getCart);
 app.use("/api/remove-from-cart", removeFromCart);
 app.use("/api/increase-cart-item", increaseCartItem);
 app.use("/api/decrease-cart-item", decreaseCartItem);
+app.use("/api/order",order);
 
 const port = 8080;
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server running at http://localhost:${port}/`);
+  // const ngrokUrl = await ngrok.connect(port);
+  // console.log(`Ngrok tunnel is active at: ${ngrokUrl}`);
 });

@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   // Validate the user's input.
-  if (!req.body.email || !req.body.password) {
-    res.status(400).send("Please provide a valid username and email.");
+  if (!req.body.email || !req.body.password || !req.body.address || !req.body.name || !req.body.phoneNumber) {
+    res.status(400).send("Please provide a valid details.");
     return;
   }
 
@@ -42,6 +42,9 @@ router.post("/", async (req, res) => {
       data: {
         email: req.body.email,
         password: hashedPassword,
+        address:req.body.address,
+        name:req.body.name,
+        phoneNumber:req.body.phoneNumber
       },
     });
 

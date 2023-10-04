@@ -74,9 +74,9 @@ function ProductList() {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-gray-100">
       <Navbar />
-      <div className="mx-12 py-3">
+      <div className="mx-12 py-3 ">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <div className="flex justify-between mb-4">
             <div>
