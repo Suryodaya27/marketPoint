@@ -28,6 +28,7 @@ const removeFromCart = require("./routes/removeFromCart");
 const increaseCartItem = require("./routes/increaseCartItem");
 const decreaseCartItem = require("./routes/decreaseCartItem");
 const order = require("./routes/order");
+const webhook = require("./routes/webhook");
 
 app.use("/api/signup", signup);
 app.use("/api/signin", signin);
@@ -39,12 +40,13 @@ app.use("/api/get-cart", getCart);
 app.use("/api/remove-from-cart", removeFromCart);
 app.use("/api/increase-cart-item", increaseCartItem);
 app.use("/api/decrease-cart-item", decreaseCartItem);
-app.use("/api/order",order);
+app.use("/api/orders",order);
+app.use("/api/webhook",webhook);
 
 const port = 8080;
 
 app.listen(port, async () => {
   console.log(`Server running at http://localhost:${port}/`);
-  // const ngrokUrl = await ngrok.connect(port);
-  // console.log(`Ngrok tunnel is active at: ${ngrokUrl}`);
+  const ngrokUrl = await ngrok.connect(port);
+  console.log(`Ngrok tunnel is active at: ${ngrokUrl}`);
 });
