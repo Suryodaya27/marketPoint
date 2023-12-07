@@ -7,4 +7,4 @@ Tech Stack: Utilized React.js with Context API, React Query, and Tailwind CSS on
 
 Result: Created a feature-rich platform that simplifies online grocery shopping, showcasing expertise in full-stack web development, user interface design, and payment gateway integration.
 
-youtube video : https://youtu.be/-JezvLU1dow
+youtube video : https://youtu.be/iHjCqbnHywM
