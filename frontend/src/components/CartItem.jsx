@@ -1,10 +1,14 @@
+// useless file
+
+
+
 import { Heart, Trash } from 'lucide-react';
 import React from 'react';
 import { useAuth } from "../AuthContext";
 import { useCart } from "../CartContext";
 
 export function CartTwo({ cartData,priceData }) {
-
+  console.log(cartData)
   const {user} = useAuth();
   const {removeFromCart} = useCart();
 
@@ -36,9 +40,9 @@ export function CartTwo({ cartData,priceData }) {
                 <li key={product.cartId} className="flex py-6">
                   <div className="flex-shrink-0">
                     <img
-                      src={product.imageSrc}
+                      src={product.product.productImage}
                       alt={product.product.productName}
-                      className="h-24 w-24 rounded-md object-contain object-center"
+                      className="h-[90px] w-[90px] rounded-md object-contain object-center"
                     />
                   </div>
                   <div className="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
@@ -116,7 +120,7 @@ export function CartTwo({ cartData,priceData }) {
                 <span className="text-base font-medium text-gray-900">{priceData.totalCartPrice}</span>
               </div>
               <div className="py-2 font-medium text-green-700">
-              You will save ₹0 on this order
+              You will save ₹1000 on this order
               </div>
             </div>
           </section>

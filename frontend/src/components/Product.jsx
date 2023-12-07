@@ -67,8 +67,8 @@ export const Product = () => {
         <div className="mx-auto flex flex-wrap items-center lg:w-4/5">
           <img
             alt={product.productName}
-            className="h-64 w-full rounded object-cover lg:h-96 lg:w-1/2"
-            src={product.image}
+            className="h-[250px] w-[250px] rounded object-contain"
+            src={product.productImage}
           />
           <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-10">
             <h2 className="text-sm font-semibold tracking-widest text-gray-500">

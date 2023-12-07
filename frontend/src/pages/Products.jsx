@@ -60,7 +60,7 @@ function ProductList() {
   );
 
   // Calculate total number of pages based on the filtered data and page size
-  const pageSize = 12; // Number of products per page
+  const pageSize = 8; // Number of products per page
   const totalPages = Math.ceil(searchedData.length / pageSize);
 
   // Calculate the starting index for the current page

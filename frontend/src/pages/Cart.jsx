@@ -132,7 +132,7 @@ function Cart() {
         <div className="mx-auto max-w-7xl px-4 lg:px-0 ">
           <div className="mx-20 max-w-2xl py-8 lg:max-w-7xl">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Cart Items
+              Cart Items!!
             </h1>
             <div className="mt-8 grid grid-cols-12 gap-4">
               <section
@@ -140,14 +140,15 @@ function Cart() {
                 className="rounded-lg bg-white col-span-8"
               >
                 <h2 id="cart-heading" className="sr-only">
-                  Items in your shopping cart
+                  Items in your shopping cart !!
                 </h2>
                 <ul role="list" className="divide-y divide-gray-200 p-5">
+                  {console.log(cartData)}
                   {cartData.map((product) => (
                     <li key={product.cartId} className="flex py-6">
                       <div className="flex-shrink-0">
                         <img
-                          src={product.imageSrc}
+                          src={product.product.productImage}
                           alt={product.product.productName}
                           className="h-24 w-24 rounded-md object-contain object-center"
                         />
@@ -240,7 +241,7 @@ function Cart() {
                   </div>
                   <div className="flex justify-between py-2">
                     <span className="text-gray-800">Discount</span>
-                    <span className="font-medium text-green-700">0</span>
+                    <span className="font-medium text-green-700">5%</span>
                   </div>
                   <div className="flex justify-between py-2">
                     <span className="text-gray-800">Delivery Charges</span>
@@ -251,11 +252,11 @@ function Cart() {
                       Total Amount
                     </span>
                     <span className="text-base font-medium text-gray-900">
-                      {priceData.totalCartPrice}
+                      {priceData.totalCartPrice - 0.05*priceData.totalCartPrice}
                     </span>
                   </div>
                   <div className="py-2 font-medium text-green-700">
-                    You will save ₹0 on this order
+                    You will save ₹ {0.05*priceData.totalCartPrice} on this order
                   </div>
                   <Link
                     to={{

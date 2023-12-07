@@ -21,6 +21,7 @@ router.get('/',verifyToken, async (req, res) => {
               productDescription: true,
               productPrice: true,
               productQuantity: true,
+              productImage: true,
             },
           },
         },
